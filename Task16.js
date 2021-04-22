@@ -5,21 +5,21 @@
 		}
 		return formatingTime;
 	}
-	function scrollWindow(){
+	function scrollWindow(){//функция скроллинга
 		for(var i=0;i<10;i++){
 			window.scrollBy(0,1920);
 		}
 	}
-	function timeCorrection(time, format){
+	function timeCorrection(time, format){//функция коррекции времени
 		return time%format;
 	}
 
-	function finalResponse(quantity, time){
+	function finalResponse(quantity, time){//объект для console.table
 		this.quantity=quantity;
 		this.time=time;
 	}
 
-	function getTime(catalog){
+	function getTime(catalog){//функция получения времени
 		var audioRow=[],  tracksLength=[]; //Создаём массивы для хранения данных из audioCatalog
 		var	seconds=0,	minutes=0,	hours=0,  days=0,  months=0; //Переменные для хранения времени продолжительности треков
 		for(var i=0; i<catalog.length;i++){
