@@ -3,7 +3,6 @@
 			time=time-format;
 			formatingTime++;
 		}
-
 		return formatingTime;
 	}
 	function scrollWindow(){
@@ -12,8 +11,12 @@
 		}
 	}
 	function timeCorrection(time, format){
-		console.log('format: '+ time%format);
 		return time%format;
+	}
+
+	function finalResponse(quantity, time){
+		this.quantity=quantity;
+		this.time=time;
 	}
 
 	function getTime(catalog){
@@ -24,15 +27,14 @@
 			audioRow[i]=catalog[i].innerText.split('\n');
 			tracksLength[i]=audioRow[i][audioRow[i].length-1].split(':');
 		} 
-		console.log('Quantity of tracks: '+tracksLength.length); //Выводим количество песен из каталога
 		for(var i=0;i<tracksLength.length;i++){
 			seconds+=+tracksLength[i][tracksLength[i].length-1];
 			minutes+=+tracksLength[i][tracksLength[i].length-2];
 			if(tracksLength[i].length===3){
 				hours+=+tracksLength[i][tracksLength[i].length-3];
 			}
-		}	//Получаем сумму продолжительности по времени всех треков в секундах, минутах и часах(если есть)
-
+		}//Получаем сумму продолжительности по времени всех треков в секундах, минутах и часах(если есть)
+		
 		minutes=timesFormated(seconds,minutes,60);
 		seconds=timeCorrection(seconds,60);
 		hours=timesFormated(minutes,hours,60);
@@ -42,10 +44,11 @@
 		months=timesFormated(days,months,30);
 		days=timeCorrection(days,30);
 		//форматирование и корректировка времени функциями
-		return (months+':'+days+':'+hours+':'+minutes+':'+seconds);
+		
+		return console.table([new finalResponse(tracksLength.length,((months>0)?(months+':'+days+':'+hours+':'+minutes+':'+seconds):
+		(days>0)?(days+':'+hours+':'+minutes+':'+seconds):(hours>0)?(hours+':'+minutes+':'+seconds):
+		(minutes+':'+seconds)))]); //возвращаем console.table с количеством треков и суммарной их продолжительностью
 	}
 		scrollWindow();//вызов функции скроллинга
 		var audioCatalog = document.getElementsByClassName('audio_row audio_row_with_cover _audio_row');//Принимаем все элементы по классу
-		var audioDuration=getTime(audioCatalog);//вызов функции получения продолжительности времени всех треков
-		console.log(audioDuration);
-
+		getTime(audioCatalog);//вызов функции получения количества треков и их суммарной продолжительности
