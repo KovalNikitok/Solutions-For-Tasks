@@ -10,8 +10,8 @@
 		return time%format;
 	}
 	function getTimesString(hours,minutes,seconds){
-		var days=0,months=0;
 		//функция для перевода времени к формату; месяцы, дни, часы, минуты, секунды
+		var days=0,months=0;
 		minutes=timesFormated(seconds,minutes,60);
 		seconds=timeCorrection(seconds,60);
 		hours=timesFormated(minutes,hours,60);
@@ -20,7 +20,6 @@
 		hours=timeCorrection(hours,24);
 		months=timesFormated(days,months,30);
 		days=timeCorrection(days,30);
-		
 		return ((months>0)?(months+':'+days+':'+hours+':'+minutes+':'+seconds)://формируем строку(в зависимотси от имеющихся данных) вида: месяцы:дни:часы:минуты:секунды
 		(days>0)?(days+':'+hours+':'+minutes+':'+seconds):(hours>0)?(hours+':'+minutes+':'+seconds):
 		(minutes+':'+seconds));
