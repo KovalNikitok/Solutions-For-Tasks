@@ -1,4 +1,5 @@
-﻿	function timesFormated(time,formatingTime,format){//функция для перевода времени к формату; месяцы, дни, часы, минуты, секунды
+﻿	function timesFormated(time,formatingTime,format){
+		//функция для преобразования времени по формату
 		while(time>=format){
 			time=time-format;
 			formatingTime++;
