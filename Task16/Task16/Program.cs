@@ -8,10 +8,11 @@ namespace Task16
     {
         public static bool VerificationMask(string input)
         {
-            string maskPattern = @"[a-z0-9\?\.\u002a]";
+            string maskPattern = @"^[a-z0-9\?\.\u002a]$";
             Regex regex = new Regex(maskPattern);
             bool isCheck = true;
             int countOfSym = 0;
+
             foreach (char mask in input)
             {
                 if (mask == '*')
@@ -24,67 +25,122 @@ namespace Task16
                     break;
                 }
                 if ((regex.IsMatch(mask.ToString()) ? isCheck = true : isCheck = false) && !isCheck) break;
-                Console.WriteLine("{0} - {1}", mask, isCheck);
             }
+            if (input.Length > 20)
+                isCheck = false;
             return isCheck;
         }
+
+        public static bool IsUserInputEqual(string mask, string input)
+        {
+            bool isEqual = false;
+            return isEqual;
+        }
+
+        public static bool IsQuestionTrue(Regex regexPattern, char symbol)
+        {
+            return regexPattern.IsMatch(symbol.ToString()) ? true : false;
+        }
+        public static bool IsStarTrue(Regex regexPattern, string input)
+        {
+            int countOfUncheck = 0;
+            foreach (char symbol in input)
+            {
+                if (symbol == '?')
+                {
+                    if (!IsQuestionTrue(regexPattern, symbol)) countOfUncheck++;
+                }
+                else
+                {
+                    if (!regexPattern.IsMatch(input[symbol].ToString())) countOfUncheck++;
+                }
+            }
+            return countOfUncheck > 0 ? false : true;
+        }
+
         static void Main(string[] args)
         {   //@"[a-z0-9\.]\.?[a-z0-9\.]){1,20}";
-            string inputPattern = @"[a-z0-9\.]";
+            string inputPattern = @"^([a-z0-9\.])${1,20}";
             Regex userRegex = new Regex(inputPattern);
             string userInput,
-                userMask = "oo*oo";
-            bool isEqual = false;
-            if (VerificationMask(userMask)) Console.WriteLine("OK");
-            else Console.WriteLine("NOT OK");
-            do
+                userMask = Console.ReadLine();
+            int starLength;
+            bool isEqual;
+            if (VerificationMask(userMask))
             {
-                userInput = Console.ReadLine();
-                if (userInput.Length > 20) break;
-                //for (int i = 0; i < userInput.Length; i++)//foreach (char iter in userInput)
-                for (int i = 0; i < userMask.Length; i++)
+                Console.WriteLine("Mask is OK!");
+                do
                 {
-                    if (/*userMask.Length <= userInput.Length &&*/ userInput[i] != userMask[i])
+                    isEqual = true;
+                    starLength = 0;
+                    userInput = Console.ReadLine();
+                    if (userInput.Length > 20)
                     {
-                        switch (userMask[i])
+                        isEqual = false;
+                        break;
+                    }
+                    for (int i = 0; i < userMask.Length; i++)
+                    {
+                        if (!isEqual) break;
+
+                        if (userInput[i + starLength] != userMask[i])
                         {
-                            case '?':
-                                if (userRegex.IsMatch(userInput[i].ToString()))
-                                    isEqual = true;
-                                else isEqual = false;
-                                break;
-                            case '*':
-                                if ((userMask.Length - 1) != i/*&& userInput.Length != userMask.Length*/)
-                                {
-                                    int delta = 1;
-                                    for (int j = userInput.Length - 1; j > i; j--)
-                                    {
-                                        if (userMask[userMask.Length - delta] != '?' && userInput[j] != userMask[userMask.Length - delta])
-                                        {
-                                            if (userRegex.IsMatch(userInput.ToString().Substring(i, j - i)))
-                                                isEqual = true;
-                                            else isEqual = false;
-                                            break;
-                                        }
-                                        delta++;
-                                    }
-                                }
-                                else
-                                {
-                                    if (userRegex.IsMatch(userInput[i].ToString()))
-                                        isEqual = true;
-                                    else isEqual = false;
+                            switch (userMask[i])
+                            {
+                                case '?':
+                                    if (!userRegex.IsMatch(userInput[i + starLength].ToString()))
+                                        isEqual = false;
                                     break;
-                                }
-                                break;
-                            default:
-                                isEqual = false;
-                                break;
+                                case '*':
+                                    if (userMask.Length == userInput.Length && userMask.Length - 1 == i)
+                                    {
+                                        if (!userRegex.IsMatch(userInput[i].ToString()))
+                                            isEqual = false;
+                                        break;
+                                    }
+                                    if (userMask.Length > userInput.Length && userMask.Length - 1 == i)
+                                        break;
+                                    if (userInput.Length != userMask.Length)
+                                    {
+                                        int delta = 1;
+                                        for (int j = userInput.Length - 1; j > i - 1; j--)
+                                        {
+                                            if (userMask[userMask.Length - delta] != '?' && userInput[j] != userMask[userMask.Length - delta])
+                                            {
+                                                if (userMask[userMask.Length - delta] == '*')
+                                                {
+                                                    string test = userInput.ToString().Substring(i, j - i + 1);
+                                                    if (userRegex.IsMatch(test.ToString()))
+                                                        starLength = j - i;
+                                                    else isEqual = false;
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    isEqual = false;
+                                                    break;
+                                                }
+                                            }
+                                            delta++;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (!userRegex.IsMatch(userInput[i].ToString()))
+                                            isEqual = false;
+                                    }
+                                    break;
+                                default:
+                                    isEqual = false;
+                                    break;
+                            }
                         }
                     }
-                }
-                Console.WriteLine("{0} -> {1}", userInput, isEqual ? "YES" : "NO");
-            } while (true);
+
+                    Console.WriteLine("{0} -> {1}", userInput, isEqual ? "YES" : "NO");
+                } while (true);
+            }
+            else Console.WriteLine("Mask is not okay");
         }
     }
 }
