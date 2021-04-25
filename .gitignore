@@ -1,0 +1,6 @@
+﻿# Игнорить эти файлы и директории
+!/Task16/.editorconfig
+!/Task16/Task16.sln
+!/Task16/.vs
+!/Task16/Task16/obj
+!/Task16/Task16/Task16.csproj
