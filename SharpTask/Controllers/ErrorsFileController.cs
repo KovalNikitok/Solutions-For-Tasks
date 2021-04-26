@@ -2,6 +2,7 @@
 using SharpTask.Models;
 using SharpTask.Models.DataInfo;
 using System.Collections.Generic;
+using System.Text;
 
 namespace SharpTask.Controllers
 {
@@ -11,7 +12,14 @@ namespace SharpTask.Controllers
     {
         public ErrorsFilesInfo Transform(FilesInfo files)
         {// метод для преобразования полей объекта FilesInfo в ErrorsFilesInfo
-            return new ErrorsFilesInfo(files.filename, files.errors);
+            List<string> str = new List<string>();
+            int iter = 0;
+            foreach(ErrorsInfo errors in files.errors)
+            {
+                str.Add(errors.error);
+                iter++;
+            }
+            return new ErrorsFilesInfo(files.filename, str);
         }
         public FilesInfo[] files = new DataFileDeserializing().GetData().Files;// Получаем десериализованный Json в объект FilesInfo[]
 

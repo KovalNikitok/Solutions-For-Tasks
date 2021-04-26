@@ -17,9 +17,9 @@ C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTa
 C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\obj\Debug\netcoreapp3.1\SharpTask.genruntimeconfig.cache
 C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\obj\Debug\netcoreapp3.1\SharpTask.csproj.CopyComplete
-C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\obj\Debug\netcoreapp3.1\SharpTask.csprojAssemblyReference.cache
 C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\obj\Debug\netcoreapp3.1\SharpTask.csproj.CoreCompileInputs.cache
 C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\obj\Debug\netcoreapp3.1\SharpTask.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\obj\Debug\netcoreapp3.1\SharpTask.csprojAssemblyReference.cache
