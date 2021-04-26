@@ -40,20 +40,18 @@ namespace Task16
         {// метод для получения значения (true/false) на соответствие введённому пользователем тексту и маски
             int starLength = 0;
             bool isEqual = true;
-            if (input.Length > 20 || input.Length == 0) 
+            if (input.Length > 20 || input.Length == 0)
             {// Проверка на длину введённого текста
+                isEqual = false;
+            }
+            if (input.Length < mask.Length - 1)//если длина введённого пользователем текста меньше на 2 и более символом, то выходим из цикла
+            {//(по условию, только * может быть "пустой",а значит длина не может отличаться более чем на 1 символ в меньшую сторону
                 isEqual = false;
             }
             for (int i = 0; i < mask.Length; i++)
             {
                 if (!isEqual) break; // проверка на булевую переменную, отвечающую за конечный вывод метода (если false, то выходим из цикла)
-                if (input.Length < mask.Length - 1)//если длина введённого пользователем текста меньше на 2 и более символом, то выходим из цикла
-                {//(по условию, только * может быть "пустой",а значит длина не может отличаться более чем на 1 символ в меньшую сторону)
-
-                    isEqual = false;
-                    break;
-                }
-                if (input[i + starLength] != mask[i] || input.Length < mask.Length)
+                if (input[i + starLength] != mask[i])
                 {// входим, если символы по одному индексу не равны (starlength отвечает за длину текста от индекса появления * до завершения её последовательности)
                     switch (mask[i])
                     {
@@ -108,10 +106,18 @@ namespace Task16
                                     isEqual = false;
                             }
                             break;
-                        default: //если встретился обычный символ
+                        default:
+                            //если встретился обычный символ
                             isEqual = false;
                             break;
                     }
+                }
+                else if (mask[mask.Length - 1] == '*' && mask.Length > input.Length)
+                {// В случае появления ситуации, когда в последнем индексе маски стоит * и она больше введённой пользователем строки, вызываем рекурсию,
+                 // удалив из строки * 
+                    isEqual = IsUserInputEqual(new System.Text.StringBuilder(mask).Remove(mask.Length - 1, 1).ToString()
+                        , input, regexPattern);
+                    break;
                 }
             }
             return isEqual;
