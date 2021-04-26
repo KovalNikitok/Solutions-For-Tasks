@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="errorsFiles\**" />
+    <Content Remove="errorsFiles\**" />
+    <EmbeddedResource Remove="errorsFiles\**" />
+    <None Remove="errorsFiles\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="data.json" />
   </ItemGroup>
 

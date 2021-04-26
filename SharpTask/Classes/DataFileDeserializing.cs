@@ -21,9 +21,9 @@ namespace SharpTask.Models
                 DataItem data = JsonConvert.DeserializeObject<DataItem>(dataJson);// конвертируем json-строку в модель данных DataItem
                 return data;
             }
-            catch
+            catch(Exception err)
             {// если на каком-либо этапе считывания/преобразования из Json файла возникли проблемы, то выходим из try - блока и выдаём сообщение об ошибке
-                throw new Exception("Не удалось десериализовать json.");
+                throw new Exception("Не удалось десериализовать json, ошибка: "+ err);
             }
         }
     }

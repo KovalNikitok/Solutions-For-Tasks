@@ -9,20 +9,25 @@ namespace SharpTask.Controllers
     [ApiController]
     public class QueryCheckController : ControllerBase
     {
-        [HttpGet]
-        public List<QueryCheckInfo> Get() /*QueryCheckInfo*/
-        {
-            FilesInfo[] data = new DataFileDeserializing().GetData().Files;
+        public FilesInfo[] data = new DataFileDeserializing().GetData().Files;
+        public QueryCheckInfo Transform(FilesInfo[] data)
+        {// метод для преобразования данных из json файла в dto объект QueryCheckInfo
             int errors = 0, total = 0;
             string check = "query_";
-            foreach(FilesInfo files in data)
-            {// ищем все result, которые false и filename, начинающиеся с query_
-                if (!files.result) errors++;
-                if(files.filename.ToLower().StartsWith(check)) total++;
+            foreach (FilesInfo files in data)
+            {
+                {// ищем все result, которые false, и filename, начинающиеся с query_
+                    if (!files.result) errors++;
+                    if (files.filename.ToLower().StartsWith(check)) total++;
+                }
             }
-            List<QueryCheckInfo> queryOut = new List<QueryCheckInfo>();
-            queryOut.Add(new QueryCheckInfo(total, data.Length - errors, errors));
-            return queryOut;
+            return new QueryCheckInfo(total, data.Length - errors, errors); //для result=true считаем вычитанием от общего количества вхождений и result=true
+        }
+
+        [HttpGet]
+        public QueryCheckInfo Get()
+        {
+            return Transform(data); // возвращаем результат работы метода Transform
         }
     }
 }

@@ -8,8 +8,8 @@
             this.correct = correct;
             this.errors = errors;
         }
-        public int total;
-        public int correct;
-        public int errors;
+        public int total { get; set; }
+        public int correct { get; set; }
+        public int errors { get; set; }
     }
 }
