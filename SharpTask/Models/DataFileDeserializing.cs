@@ -9,12 +9,11 @@ namespace SharpTask.Models
     {   
         public DataItem GetData()
         {
-            var assembly = Assembly.GetExecutingAssembly();
             string resourcePath = "SharpTask.data.json";
             string dataJson = "";
             try
             {
-                using (Stream thisStream = assembly.GetManifestResourceStream(resourcePath))
+                using (Stream thisStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourcePath))
                 using (StreamReader streamReader = new StreamReader(thisStream))
                 {
                     dataJson = streamReader.ReadToEnd();

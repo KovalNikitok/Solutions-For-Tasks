@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SharpTask.Models;
 using SharpTask.Models.DataInfo;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace SharpTask.Controllers
@@ -9,10 +10,10 @@ namespace SharpTask.Controllers
     [ApiController]
     public class FilesController : ControllerBase
     {
-        public FilesInfo[] Get([FromUri]bool correct)
+        public List<FilesInfo> Get([FromUri]bool correct)
         {
             FilesInfo[] files = new DataFileDeserializing().GetData().Files;
-            FilesInfo[] filesToOut = new FilesInfo[files.Length];
+            List<FilesInfo> fList = new List<FilesInfo>();
             int iter = 0;
             if (correct)
             {
@@ -20,7 +21,7 @@ namespace SharpTask.Controllers
                 { 
                     if (files[index].result)
                     {
-                        filesToOut[iter] = files[index];
+                        fList.Add(files[index]);
                         iter++;
                     } 
                 }
@@ -31,12 +32,12 @@ namespace SharpTask.Controllers
                 {
                     if (!files[index].result)
                     {
-                        filesToOut[iter] = files[index];
+                        fList.Add(files[index]);
                         iter++;
                     }   
                 }
             }
-            return filesToOut;
+            return fList;
         }
     }
 }
