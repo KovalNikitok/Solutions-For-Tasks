@@ -10,19 +10,17 @@ namespace SharpTask.Controllers
     [ApiController]
     public class FilesController : ControllerBase
     {
-        public List<FilesInfo> Get([FromUri]bool correct)
+        public List<string> Get([FromUri]bool correct)
         {
-            FilesInfo[] files = new DataFileDeserializing().GetData().Files;
-            List<FilesInfo> fList = new List<FilesInfo>();
-            int iter = 0;
+            FilesInfo[] files = new DataFileDeserializing().GetData().Files; //получаем десериализованный Json
+            List<string> fList = new List<string>(); // строка для формирования овтета
             if (correct)
-            {
+            {// условия в рамках запроса api/filenames?correct={value}, где value = true/false
                 for (int index = 0; index < files.Length; index++)
-                { 
+                {// для получения результатов проходим по всему массиву объектов files и отбираем в список лишь то, что соответствует нашему условию
                     if (files[index].result)
                     {
-                        fList.Add(files[index]);
-                        iter++;
+                        fList.Add(files[index].filename);
                     } 
                 }
             }
@@ -32,8 +30,7 @@ namespace SharpTask.Controllers
                 {
                     if (!files[index].result)
                     {
-                        fList.Add(files[index]);
-                        iter++;
+                        fList.Add(files[index].filename);
                     }   
                 }
             }

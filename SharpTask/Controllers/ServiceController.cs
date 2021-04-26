@@ -10,7 +10,7 @@ namespace SharpTask.Controllers
     public class ServiceController : ControllerBase
     {
         public ServiceInfo ServiceOutput()
-        {
+        {// вызываем метод созданного класса для получения объекта с данными о проекте
             ServerService service = new ServerService();
             return service.getServiceInfo();
         }

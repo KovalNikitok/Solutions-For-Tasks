@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SharpTask.Models;
 using SharpTask.Models.DataInfo;
+using System.Collections.Generic;
 
 namespace SharpTask.Controllers
 {
@@ -8,22 +9,44 @@ namespace SharpTask.Controllers
     [ApiController]
     public class ErrorsFileController : ControllerBase
     {
-        public FilesInfo[] files = new DataFileDeserializing().GetData().Files;
+        public ErrorsFilesInfo Transform(FilesInfo files)
+        {// метод для преобразования полей объекта FilesInfo в ErrorsFilesInfo
+            return new ErrorsFilesInfo(files.filename, files.errors);
+        }
+        public FilesInfo[] files = new DataFileDeserializing().GetData().Files;// Получаем десериализованный Json в объект FilesInfo[]
+
         [HttpGet]
-        public ErrorsFilesInfo[] Get()
+        public List<ErrorsFilesInfo> Get()
         {
-            FilesInfo[] filesToOut = new FilesInfo[files.Length];
-            int iter = 0;
-                for (int index = 0; index < files.Length; index++)
-                {
-                    if (!files[index].result)
-                    {
-                        filesToOut[iter] = files[index];
-                        iter++;
-                    }
+            List<ErrorsFilesInfo> filesOut = new List<ErrorsFilesInfo>();// Список для формирования ответа*
+            for (int index = 0; index < files.Length; index++)
+            {
+                if (!files[index].result)
+                {// условие в рамках запроса
+                    filesOut.Add(Transform(files[index]));
                 }
-            ErrorsFilesInfo[] errorsFiles = (ErrorsFilesInfo[])filesToOut.Clone();
-            return errorsFiles;
+            }
+            return filesOut;
+        }
+
+        [HttpGet("{index}")]
+        public List<ErrorsFilesInfo> Get(int index)
+        {
+            List<ErrorsFilesInfo> filesOut = new List<ErrorsFilesInfo>();
+            int count = 0;
+            for (int iter = 0; iter < files.Length; iter++)
+            {
+                if (!files[iter].result)
+                {
+                    filesOut.Add(Transform(files[iter]));
+                    count++;
+                }
+            }
+            if (index < count && index >= 0)
+            {// уловие для отбора по индексу 
+                return filesOut.GetRange(index, 1);
+            }
+            else return null;
         }
     }
 }

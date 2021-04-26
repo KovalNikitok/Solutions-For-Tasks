@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SharpTask.Models;
-using SharpTask.Models.DataInfo;
 
 namespace SharpTask.Controllers
 {
