@@ -1,0 +1,1 @@
+﻿{"Scan":{"scanTime":"2018-08-03T12:07:30.315148+06:00","db":"nikitaTest","server":"sqlexpress","errorCount":1},"Files":[{"filename":"001.vbs","result":false,"errors":[{"module":"compiler","ecode":2,"error":"Ошибка синтаксиса"}],"scantime":"2018-12-06T15:10:58.4069484+06:00"},{"filename":"002.vbs","result":true,"errors":[],"scantime":"2018-12-06T15:10:59.0983812+06:00"}]}

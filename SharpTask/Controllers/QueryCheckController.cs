@@ -14,14 +14,18 @@ namespace SharpTask.Controllers
         {// метод для преобразования данных из json файла в dto объект QueryCheckInfo
             int errors = 0, total = 0;
             string check = "query_";
+            List<string> filenames = new List<string>();
             foreach (FilesInfo files in data)
             {
                 {// ищем все result, которые false, и filename, начинающиеся с query_
                     if (!files.result) errors++;
                     if (files.filename.ToLower().StartsWith(check)) total++;
+                    if (files.errors.Length > 0)
+                        filenames.Add(files.filename);
+                    //else filenames.Add(null);
                 }
             }
-            return new QueryCheckInfo(total, data.Length - errors, errors); //для result=true считаем вычитанием от общего количества вхождений и result=true
+            return new QueryCheckInfo(total, data.Length - errors, errors, filenames); //для result=true считаем вычитанием от общего количества вхождений и result=true
         }
 
         [HttpGet]

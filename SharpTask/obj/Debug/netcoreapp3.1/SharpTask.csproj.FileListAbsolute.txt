@@ -23,3 +23,4 @@ C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTa
 C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\obj\Debug\netcoreapp3.1\SharpTask.csprojAssemblyReference.cache
+C:\Users\Никита\Desktop\HOMEWORK\Thumbtack\POS\Solutions-For-Tasks\SharpTask\bin\Debug\netcoreapp3.1\26-04-2021_18-10-12.json
