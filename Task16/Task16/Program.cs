@@ -66,8 +66,6 @@ namespace Task16
                                     isEqual = false;
                                 break;
                             }
-                            if (mask.Length > input.Length && mask.Length - 1 == i)// если * встретилась в конце, а длина текста пользователя меньше маски на 1 (пустая последовательность)
-                                break;
                             if (input.Length != mask.Length)// если длина разлчается
                             {
                                 int delta = 1;
